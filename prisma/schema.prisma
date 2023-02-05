@@ -11,17 +11,128 @@ datasource db {
 }
 
 model User {
-    id          Int      @id @default(autoincrement())
-    username    String   @unique
-    password    String  
-    email       String   @unique
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  email    String @unique
 
-    firstname   String?
+  firstname String?
+  lastname  String?
 
-    lastname     String?
+  comments Comment[]
+  orders   Order[]
 
-    createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
 
-    updatedAt   DateTime @updatedAt
+  updatedAt DateTime @updatedAt
+}
 
+enum sweetType {
+  cake
+  dry
+  creamy
+}
+
+model Sweet {
+  id           Int       @id @default(autoincrement())
+  type         sweetType
+  pricePerKilo Int
+  image        String
+  rate         Int
+  description  String
+  title        String
+  stock        Int
+  shop         Shop      @relation(fields: [shopId], references: [id])
+  shopId       Int
+
+  comments Comment[]
+  orders   Order[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  likes       Int
+  dislikes    Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  sweet   Sweet @relation(fields: [sweetId], references: [id])
+  sweetId Int
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model Shop {
+  id       Int    @id @default(autoincrement())
+  title    String
+  address  String
+  phone    Int
+  seller   Seller @relation(fields: [sellerId], references: [id])
+  sellerId Int
+
+  sweets    Sweet[]
+  orders     Order[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+}
+
+model Order {
+  id         Int    @id @default(autoincrement())
+  totalPrice Int
+  status     String
+  weight     Int
+
+  sweet   Sweet @relation(fields: [sweetId], references: [id])
+  sweetId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  shop   Shop @relation(fields: [shopId], references: [id])
+  shopId Int
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+enum genderType {
+  male
+  female
+}
+
+model Seller {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  password     String
+  email        String   @unique
+  nationalCode String   @unique
+  firstName    String?
+  lastName     String?
+  birthday     DateTime
+
+  gender genderType
+
+  province    String
+  city        String
+  homeAddress String
+
+  sheba String
+
+  shops Shop[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
 }
