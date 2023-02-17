@@ -46,17 +46,17 @@ export class UsersService {
     async findOne(id: number) {
         try {
             const user = await this.prisma.user.findUnique({ where: { id } })
-            
-            if(user) {
+
+            if (user) {
                 return user;
             } else {
                 // this error is passed to 'catch' and will be handled there
                 throw new HttpException(errorList.notFound, HttpStatus.NOT_FOUND)
-            }    
-        } catch (error) {   
+            }
+        } catch (error) {
             if (error instanceof HttpException) {
-                throw new HttpException(errorList.notFound, HttpStatus.NOT_FOUND)
-            
+                throw error
+
             } else {
                 throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)
             }
