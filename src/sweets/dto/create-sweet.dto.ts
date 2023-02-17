@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, IsNumber } from 'class-validator';
+import { IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength, IsNumber, IsObject } from 'class-validator';
 
 
 enum sweetType {
@@ -8,18 +8,27 @@ enum sweetType {
     creamy = "creamy"
 }
 
+interface shopInterface {
+    connect: {id:number}
+}
+
 
 export class CreateSweetDto {
 
     @IsNotEmpty()
     @IsEnum(sweetType)
     @ApiProperty()
-    type: string
+    type: sweetType
 
     @IsNotEmpty()
     @ApiProperty()
     @IsNumber()
     pricePerKilo: number
+
+    @IsNotEmpty()
+    @ApiProperty()
+    @IsString()
+    image: string
 
     @IsNotEmpty()
     @IsString()
@@ -38,7 +47,7 @@ export class CreateSweetDto {
 
     @IsNotEmpty()
     @ApiProperty()
-    @IsNumber()
-    shopId: number
+    @IsObject()
+    shop: shopInterface
 
 }
