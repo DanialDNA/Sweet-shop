@@ -11,6 +11,9 @@ export class SellersService {
 
     async create(createSellerDto: CreateSellerDto) {
         try {
+            // convert birthday from timestamp to date fromat
+            createSellerDto.birthday = new Date(createSellerDto.birthday)
+            
             const seller = await this.prisma.seller.create({ data: createSellerDto })
             return seller
         } catch (error) {

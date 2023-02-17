@@ -40,8 +40,8 @@ export class CreateSellerDto {
     lastName: string | null
     
     @ApiProperty()
-    @IsString()
-    @IsOptional()
+    @IsNumber()
+    @IsNotEmpty()
     birthday: Date
     
     @ApiProperty()
@@ -51,21 +51,21 @@ export class CreateSellerDto {
 
     @ApiProperty()
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     province: string
     
     @ApiProperty()
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     city: string
     
     @ApiProperty()
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     homeAddress: string
     
     @ApiProperty()
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     sheba: string
 }
