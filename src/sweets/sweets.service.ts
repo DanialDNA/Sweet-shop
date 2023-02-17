@@ -17,14 +17,12 @@ export class SweetsService {
         } catch (error) {
             throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)
         }
-
-
     }
 
 
-    findAll() {
+    async findAll() {
         try {
-            const sweets = this.prisma.sweet.findMany({})
+            const sweets = await this.prisma.sweet.findMany({})
             return sweets
 
         } catch (error) {
@@ -33,9 +31,9 @@ export class SweetsService {
 
     }
 
-    findOne(id: number) {
+    async findOne(id: number) {
         try {
-            const sweet = this.prisma.sweet.findUnique({ where: { id } })
+            const sweet = await this.prisma.sweet.findUnique({ where: { id } })
             if (sweet) {
                 return sweet
 
@@ -54,9 +52,9 @@ export class SweetsService {
 
     }
 
-    update(id: number, updateSweetDto: UpdateSweetDto) {
+    async update(id: number, updateSweetDto: UpdateSweetDto) {
         try {
-            const sweet = this.prisma.sweet.update({ where: { id }, data: updateSweetDto })
+            const sweet = await this.prisma.sweet.update({ where: { id }, data: updateSweetDto })
             return sweet
 
         } catch (error) {
@@ -69,18 +67,18 @@ export class SweetsService {
         }
     }
 
-    remove(id: number) {
+    async remove(id: number) {
         try {
-            const sweet = this.prisma.sweet.delete( { where: {id}})
+            const sweet = await this.prisma.sweet.delete({ where: { id } })
             return sweet
-        
+
         } catch (error) {
             // "P2025 means does not exist"
             if (error instanceof PrismaClientKnownRequestError && error.code === "P2025") {
                 throw new HttpException(errorList.notFound, HttpStatus.NOT_FOUND)
             } else {
                 throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)
-            }    
+            }
         }
     }
 }
