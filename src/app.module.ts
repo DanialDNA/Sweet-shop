@@ -4,6 +4,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { SweetsModule } from './sweets/sweets.module';
 import { ShopsModule } from './shops/shops.module';
+import { SellersModule } from './sellers/sellers.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { ShopsModule } from './shops/shops.module';
         ConfigModule.forRoot({ isGlobal: true }),
         PrismaModule,
         SweetsModule,
-        ShopsModule
+        ShopsModule,
+        SellersModule
     ],
   controllers: [],
   providers: [],
