@@ -1,10 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
 
-interface sellerInterface {
-    connect: { id: number }
+// interface sellerInterface {
+//     connect: { id: number }
+// }
+
+
+class connectSubDto {
+    @ApiProperty()
+    @IsNumber()
+    @IsNotEmpty()
+    id: number
+
 }
+
+class sellerSubDto {
+    @ApiProperty({ type: connectSubDto})
+    @IsObject()
+    @IsNotEmpty()
+    connect: connectSubDto
+}
+
 
 export class CreateShopDto {
     @ApiProperty()
@@ -22,8 +39,8 @@ export class CreateShopDto {
     @IsNotEmpty()
     phone: number
 
-    @ApiProperty()
-    @IsNumber()
+    @ApiProperty({ type: sellerSubDto})
+    @IsObject()
     @IsNotEmpty()
-    seller: sellerInterface
+    seller: sellerSubDto
 }

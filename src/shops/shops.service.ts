@@ -12,7 +12,7 @@ export class ShopsService {
     async create(createShopDto: CreateShopDto) {
         try {
             const shop = await this.prisma.shop.create({data: createShopDto})        
-            return 
+            return shop
             
         } catch (error) {
             throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)

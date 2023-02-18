@@ -8,8 +8,25 @@ enum sweetType {
     creamy = "creamy"
 }
 
-interface shopInterface {
-    connect: {id:number}
+// interface shopInterface {
+//     connect: {id:number}
+// }
+
+class connectSubDtop {
+    @ApiProperty()
+    @IsNumber()
+    @IsNotEmpty()
+    id: number
+
+}
+
+
+class shopSubDtop {
+    @ApiProperty({ type: connectSubDtop})
+    @IsObject()
+    @IsNotEmpty()
+    connect: connectSubDtop
+
 }
 
 
@@ -17,7 +34,7 @@ export class CreateSweetDto {
 
     @IsNotEmpty()
     @IsEnum(sweetType)
-    @ApiProperty()
+    @ApiProperty({enum: sweetType})
     type: sweetType
 
     @IsNotEmpty()
@@ -48,6 +65,6 @@ export class CreateSweetDto {
     @IsNotEmpty()
     @ApiProperty()
     @IsObject()
-    shop: shopInterface
+    shop: shopSubDtop
 
 }
