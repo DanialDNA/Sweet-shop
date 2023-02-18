@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { SweetsModule } from './sweets/sweets.module';
 import { ShopsModule } from './shops/shops.module';
 import { SellersModule } from './sellers/sellers.module';
+import { OrdersModule } from './orders/orders.module';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { SellersModule } from './sellers/sellers.module';
         PrismaModule,
         SweetsModule,
         ShopsModule,
-        SellersModule
+        SellersModule,
+        OrdersModule
     ],
   controllers: [],
   providers: [],
