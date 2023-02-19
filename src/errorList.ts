@@ -24,6 +24,14 @@ export const errorList = {
     notFound: {
         status: HttpStatus.NOT_FOUND,
         message: "داده مورد نظر پیدا نشد"
+    },
+
+    wrongUsernameFormat: {
+        message: "شماره تلفن همراه اشتباه است"
+    },
+
+    minPasswordLength: {
+        message: "رمز عبور باید بیشتر از ۸ کاراکتر باشد"
     }
 
 }
