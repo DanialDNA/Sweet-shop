@@ -1,5 +1,7 @@
 import { registerDecorator, ValidationOptions } from 'class-validator';
 import * as zxcvbn from 'zxcvbn';
+import { errorList } from 'src/errorList';
+
 
 export function IsPasswordValid(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
@@ -11,12 +13,12 @@ export function IsPasswordValid(validationOptions?: ValidationOptions) {
       validator: {
         validate(value: any) {
           if (!value) {
-            this.error = 'Empty password';
+            this.error = errorList.emptyPassword;
             return false;
           }
           const result = zxcvbn(value);
           if (result.score === 0) {
-            this.error = 'Password is too weak';
+            this.error = errorList.weakPassword;
             return false;
           }
           return true;

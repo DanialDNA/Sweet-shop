@@ -32,6 +32,10 @@ export const errorList = {
 
     minPasswordLength: {
         message: "رمز عبور باید بیشتر از ۸ کاراکتر باشد"
-    }
+    },
+
+    emptyPassword: "رمز عبور نباید خالی باشد",
+
+    weakPassword: "لطفا پسورد قوی تری را وارد کنید "
 
 }
