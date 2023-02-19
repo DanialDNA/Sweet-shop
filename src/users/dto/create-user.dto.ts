@@ -18,7 +18,6 @@ export class CreateUserDto {
 
     @ApiProperty()
     @IsEmail({}, errorList.wrongEmail)
-    // @IsNotEmpty()
     email: string
 
 }
