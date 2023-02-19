@@ -13,13 +13,12 @@ export class CreateUserDto {
     @ApiProperty()
     @IsPasswordValid()
     @IsString()
-    // @MinLength(8, errorList.minPasswordLength)
     password: string
 
 
     @ApiProperty()
-    @IsEmail()
-    @IsNotEmpty()
+    @IsEmail({}, errorList.wrongEmail)
+    // @IsNotEmpty()
     email: string
 
 }

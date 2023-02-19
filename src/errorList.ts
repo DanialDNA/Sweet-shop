@@ -34,6 +34,10 @@ export const errorList = {
         message: "رمز عبور باید بیشتر از ۸ کاراکتر باشد"
     },
 
+    wrongEmail: {
+        message: "ایمیل وارد شده نامعتبر است"
+    },
+
     emptyPassword: "رمز عبور نباید خالی باشد",
 
     weakPassword: "لطفا پسورد قوی تری را وارد کنید "
