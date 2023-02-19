@@ -25,12 +25,28 @@ export class OrdersService {
             return orders
 
         } catch (error) {
-            throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)            
+            throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} order`;
+    async findOne(id: number) {
+        try {
+            const order = await this.prisma.order.findUnique({ where: { id } })
+
+            if (order) {
+                return order
+            } else {
+                throw new HttpException(errorList.notFound, HttpStatus.NOT_FOUND)
+            }
+
+        } catch (error) {
+            if (error instanceof HttpException) {
+                throw error
+            
+            } else {
+                throw new HttpException(errorList.internalServerError, HttpStatus.INTERNAL_SERVER_ERROR)
+            }
+        }
     }
 
     update(id: number, updateOrderDto: UpdateOrderDto) {
